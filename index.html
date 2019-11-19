@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
+
 <body>
-    
+    <div id="start-container" class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col">
+                <button type="button" id="start-btn" onclick="startQuiz()" class="btn btn-secondary btn-lg">Start Quiz!</button>
+            </div>
+        </div>
+    </div>
+    <div id="quiz-space" class="container d-none">
+
+    </div>
+    <div id="result-space" class="container d-none">
+        
+    </div>
+
+
 
 
     <script src="./script.js"></script>
 </body>
+
 </html>
