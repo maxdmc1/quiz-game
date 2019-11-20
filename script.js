@@ -86,28 +86,28 @@ console.log(defaultTime);
 function startTimer() {
     time = defaultTime
 
-        myInterval = setInterval(function () {
-            time = time - 1;
-            console.log(time);
-            localStorage.setItem("time", time);
+    myInterval = setInterval(function () {
+        time = time - 1;
+        console.log(time);
+        localStorage.setItem("time", time);
 
-            let minutes = Math.floor(time / 60) % 60;
-            let seconds = time % 60;
+        let minutes = Math.floor(time / 60) % 60;
+        let seconds = time % 60;
 
-            if (minutes < 10) {
-                minutes = "0" + minutes
-            }
-            if (seconds < 10) {
-                seconds = "0" + seconds;
-            }
-            clockEl.innerHTML = minutes + ":" + seconds;
+        if (minutes < 10) {
+            minutes = "0" + minutes
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        clockEl.innerHTML = minutes + ":" + seconds;
 
-            if (time <= 0) {
-                clearInterval(myInterval);
-            }
-        }, 1000)
+        if (time <= 0) {
+            clearInterval(myInterval);
+        }
+    }, 1000)
 
-    };
+};
 
 
 
@@ -116,14 +116,14 @@ function compareAnswer(event) {
     console.log(userInput, this);
     if (userInput === questions[question].answer) {
         // correctAnswer++
-        if (score === 0){
+        if (score === 0) {
             score = time;
-        }else{
+        } else (
             score = score + time
-        }
-
+            )
     } else (
-        wrongAnswer++
+        // wrongAnswer++;
+        time = time - 15
     )
     if (question < questions.length - 1) {
         question++
@@ -132,6 +132,7 @@ function compareAnswer(event) {
         displayResults()
     )
 }
+
 
 function displayResults() {
     quizSpaceEl.innerHTML = "";
