@@ -50,28 +50,47 @@ function startQuiz() {
     startContainerEl.setAttribute("class", "container d-none")
     quizSpaceEl.setAttribute("class", "container")
 
-    newQuestion()
+
+    newQuestion(question)
 }
 // Tutor assisted with this portion - this is jQuery
-function newQuestion() {
+function newQuestion(q) {
     quizSpaceEl.innerHTML = "";
-    quizSpaceEl.innerHTML = `<p>${questions[question].title} </p>
-    <button value ="${questions[question].choices[0]}" onclick="compareAnswer(this)" >${questions[question].choices[0]}</button>
-    <button value ="${questions[question].choices[1]}" onclick="compareAnswer(this)" >${questions[question].choices[1]}</button>
-    <button value ="${questions[question].choices[2]}" onclick="compareAnswer(this)" >${questions[question].choices[2]}</button>
-    <button value ="${questions[question].choices[3]}" onclick="compareAnswer(this)" >${questions[question].choices[3]}</button>`
+    // quizSpaceEl.innerHTML = `<p>${questions[question].title} </p>
+    // <button value ="${questions[question].choices[0]}" onclick="compareAnswer(this)" >${questions[question].choices[0]}</button>
+    // <button value ="${questions[question].choices[1]}" onclick="compareAnswer(this)" >${questions[question].choices[1]}</button>
+    // <button value ="${questions[question].choices[2]}" onclick="compareAnswer(this)" >${questions[question].choices[2]}</button>
+    // <button value ="${questions[question].choices[3]}" onclick="compareAnswer(this)" >${questions[question].choices[3]}</button>`
+    const quizQuestionEl = document.createElement("div");
+    quizSpaceEl.append(quizQuestionEl);
+    quizQuestionEl.setAttribute("class", "row m-5")
+    // for (let i = 0; i < questions.length; i++) {
+    quizQuestionEl.innerHTML = questions[q].title;
+
+    for (let j = 0; j < questions[q].choices.length; j++) {
+        const buttonEl = document.createElement("button");
+        quizSpaceEl.append(buttonEl)
+        buttonEl.innerHTML = questions[q].choices[j];
+        buttonEl.addEventListener("click", compareAnswer);
+        buttonEl.setAttribute("value", questions[q].choices[j]);
+    }
+
+
+
 }
 
 function compareAnswer(event) {
-    let userInput = event.getAttribute("value");
+    let userInput = event.target.getAttribute("value");
+    console.log(userInput, this);
     if (userInput === questions[question].answer) {
         correctAnswer++
+        
     } else (
         wrongAnswer++
     )
     if (question < questions.length - 1) {
         question++
-        newQuestion()
+        newQuestion(question)
     } else (
         displayResults()
     )
@@ -82,7 +101,7 @@ function displayResults() {
     quizSpaceEl.setAttribute("class", "d-none");
     resultSpaceEl.setAttribute("class", "container mt-5 border border-dark");
     // display totals 
-    resultSpaceEl.innerHTML = "Your Score is: "+correctAnswer
+    resultSpaceEl.innerHTML = "Your Score is: " + correctAnswer
 
 
     // display button to restart the game
